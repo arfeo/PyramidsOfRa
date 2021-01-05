@@ -31,6 +31,7 @@
     "@typescript-eslint/no-inferrable-types": "error",
     "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/no-shadow": ["error", { "hoist": "all" }],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -119,7 +120,7 @@
         "allowForLoopAfterthoughts": true
       }
     ],
-    "no-shadow": ["error", { "hoist": "all" }],
+    "no-shadow": "off",
     "no-unused-vars": "off",
     "no-useless-concat": "error",
     "no-useless-return": "warn",

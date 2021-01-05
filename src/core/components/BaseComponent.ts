@@ -1,5 +1,10 @@
 import { Images, EventHandler } from './types';
 
+enum EventHandlerAction {
+  Add = 'add',
+  Remove = 'remove'
+}
+
 export abstract class BaseComponent {
   public eventHandlers: EventHandler[];
   public images: Images;
@@ -44,7 +49,7 @@ export abstract class BaseComponent {
     })));
   }
 
-  private processEventHandlers(actionType: 'add' | 'remove'): void {
+  private processEventHandlers(actionType: EventHandlerAction): void {
     if (!Array.isArray(this.eventHandlers) || this.eventHandlers.length === 0) {
       return;
     }
@@ -65,10 +70,10 @@ export abstract class BaseComponent {
       }
 
       switch (actionType) {
-        case 'add':
+        case EventHandlerAction.Add:
           element.addEventListener(type, listener);
           break;
-        case 'remove':
+        case EventHandlerAction.Remove:
           element.removeEventListener(type, listener);
           break;
         default:
@@ -78,10 +83,10 @@ export abstract class BaseComponent {
   }
 
   public setUpEventHandlers(): void {
-    this.processEventHandlers('add');
+    this.processEventHandlers(EventHandlerAction.Add);
   }
 
   public removeEventHandlers(): void {
-    this.processEventHandlers('remove');
+    this.processEventHandlers(EventHandlerAction.Remove);
   }
 }
