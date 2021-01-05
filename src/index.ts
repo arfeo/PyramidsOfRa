@@ -1,3 +1,5 @@
+import { Game } from './components/Game';
+
 window.onload = () => {
-  document.getElementById('root').innerHTML = 'Pyramids of Ra';
+  new Game();
 };
