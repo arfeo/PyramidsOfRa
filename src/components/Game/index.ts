@@ -1,14 +1,12 @@
 import { PageComponent } from '../../core/components';
 
 class Game extends PageComponent {
-  protected constructor() {
-    super();
-
+  public init(): void {
     this.appRoot = document.getElementById('root');
   }
 
-  public render() {
-    const el = document.createElement('div');
+  public render(): HTMLElement {
+    const el: HTMLElement = document.createElement('div');
 
     el.innerHTML = 'Pyramids of Ra';
 
