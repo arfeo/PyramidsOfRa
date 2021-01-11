@@ -1,0 +1,1 @@
+export { animateBall } from './ball';

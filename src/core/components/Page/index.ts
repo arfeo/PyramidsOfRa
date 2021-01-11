@@ -7,7 +7,7 @@ export abstract class PageComponent<TState = {}> extends BaseComponent {
   public appRoot: HTMLElement;
   public state: TState;
   public loopTimeout: number;
-  public animations: { [key: string]: number[] | number };
+  public animations: { [key: string]: number[] | number | null };
   public afterUpdate?(): void;
   public loop?(): void;
 

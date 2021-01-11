@@ -5,6 +5,7 @@ import { LEVELS } from '../../constants/levels';
 
 import { getCellSize } from '../../core/utils/game';
 import { renderMap, renderPanel } from './render';
+import { animateBall } from './animations';
 
 import { Level } from './types';
 
@@ -36,6 +37,10 @@ class Game extends PageComponent {
     this.ballCanvas = document.createElement('canvas');
 
     this.energyLevel = energyLevel;
+
+    this.animations = {
+      ball: null,
+    };
   }
 
   public render(): HTMLElement {
@@ -62,6 +67,8 @@ class Game extends PageComponent {
   public afterMount(): void {
     renderPanel.call(this);
     renderMap.call(this);
+
+    animateBall.call(this);
   }
 }
 
