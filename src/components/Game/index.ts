@@ -3,11 +3,11 @@ import { PageComponent } from '../../core/components';
 import { GAME_CELL_SIZE_VMIN, MAP_HEIGHT, MAP_WIDTH } from '../../constants/game';
 
 import { getCellSize } from '../../core/utils/game';
-import { renderEnergyPanel } from './render';
+import { renderPanel } from './render';
 
 class Game extends PageComponent {
   private cellSize: number;
-  private energyPanel: HTMLElement;
+  private panel: HTMLElement;
   private mapCanvas: HTMLCanvasElement;
   private ballCanvas: HTMLCanvasElement;
   private energyLevel: number;
@@ -21,7 +21,7 @@ class Game extends PageComponent {
 
     this.appRoot = document.getElementById('root');
 
-    this.energyPanel = document.createElement('div');
+    this.panel = document.createElement('div');
     this.mapCanvas = document.createElement('canvas');
     this.ballCanvas = document.createElement('canvas');
 
@@ -33,7 +33,7 @@ class Game extends PageComponent {
     const canvasContainer: HTMLElement = document.createElement('div');
 
     gameBoard.className = 'gameBoard';
-    this.energyPanel.className = '-energy-panel';
+    this.panel.className = '-panel';
     canvasContainer.className = '-canvas-container';
     this.mapCanvas.className = '-map-canvas';
     this.ballCanvas.className = '-ball-canvas';
@@ -43,7 +43,7 @@ class Game extends PageComponent {
     this.ballCanvas.width = MAP_WIDTH * this.cellSize;
     this.ballCanvas.height = MAP_HEIGHT * this.cellSize;
 
-    gameBoard.appendChild(this.energyPanel);
+    gameBoard.appendChild(this.panel);
     gameBoard.appendChild(canvasContainer);
     canvasContainer.appendChild(this.mapCanvas);
     canvasContainer.appendChild(this.ballCanvas);
@@ -52,7 +52,7 @@ class Game extends PageComponent {
   }
 
   public afterMount(): void {
-    renderEnergyPanel.call(this);
+    renderPanel.call(this);
   }
 }
 

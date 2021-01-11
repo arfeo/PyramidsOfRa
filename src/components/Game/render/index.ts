@@ -1,1 +1,1 @@
-export { renderEnergyPanel } from './energyPanel';
+export { renderPanel } from './panel';
