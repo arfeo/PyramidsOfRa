@@ -1,1 +1,1 @@
-export { renderGameBoard } from './gameBoard';
+export { renderEnergyPanel } from './energyPanel';

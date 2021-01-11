@@ -1,9 +1,9 @@
 import { PageComponent } from '../../core/components';
 
-import { GAME_CELL_SIZE_VMIN } from '../../constants/game';
+import { GAME_CELL_SIZE_VMIN, MAP_HEIGHT, MAP_WIDTH } from '../../constants/game';
 
 import { getCellSize } from '../../core/utils/game';
-import { renderGameBoard } from './render';
+import { renderEnergyPanel } from './render';
 
 class Game extends PageComponent {
   private cellSize: number;
@@ -29,7 +29,30 @@ class Game extends PageComponent {
   }
 
   public render(): HTMLElement {
-    return renderGameBoard.call(this);
+    const gameBoard: HTMLElement = document.createElement('div');
+    const canvasContainer: HTMLElement = document.createElement('div');
+
+    gameBoard.className = 'gameBoard';
+    this.energyPanel.className = '-energy-panel';
+    canvasContainer.className = '-canvas-container';
+    this.mapCanvas.className = '-map-canvas';
+    this.ballCanvas.className = '-ball-canvas';
+
+    this.mapCanvas.width = MAP_WIDTH * this.cellSize;
+    this.mapCanvas.height = MAP_HEIGHT * this.cellSize;
+    this.ballCanvas.width = MAP_WIDTH * this.cellSize;
+    this.ballCanvas.height = MAP_HEIGHT * this.cellSize;
+
+    gameBoard.appendChild(this.energyPanel);
+    gameBoard.appendChild(canvasContainer);
+    canvasContainer.appendChild(this.mapCanvas);
+    canvasContainer.appendChild(this.ballCanvas);
+
+    return gameBoard;
+  }
+
+  public afterMount(): void {
+    renderEnergyPanel.call(this);
   }
 }
 
