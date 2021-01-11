@@ -1,9 +1,12 @@
 import { PageComponent } from '../../core/components';
 
 import { GAME_CELL_SIZE_VMIN, MAP_HEIGHT, MAP_WIDTH } from '../../constants/game';
+import { LEVELS } from '../../constants/levels';
 
 import { getCellSize } from '../../core/utils/game';
-import { renderPanel } from './render';
+import { renderMap, renderPanel } from './render';
+
+import { Level } from './types';
 
 class Game extends PageComponent {
   private cellSize: number;
@@ -11,12 +14,19 @@ class Game extends PageComponent {
   private mapCanvas: HTMLCanvasElement;
   private ballCanvas: HTMLCanvasElement;
   private energyLevel: number;
+  private level: Level;
 
   constructor(levelId = 1, energyLevel = 0) {
     super(levelId, energyLevel);
   }
 
   public init(levelId: number, energyLevel: number): void {
+    this.level = LEVELS.find((item: Level) => item.id === levelId);
+
+    if (!this.level) {
+      throw 'Incorrect level id.';
+    }
+
     this.cellSize = getCellSize(GAME_CELL_SIZE_VMIN);
 
     this.appRoot = document.getElementById('root');
@@ -38,10 +48,8 @@ class Game extends PageComponent {
     this.mapCanvas.className = '-map-canvas';
     this.ballCanvas.className = '-ball-canvas';
 
-    this.mapCanvas.width = MAP_WIDTH * this.cellSize;
-    this.mapCanvas.height = MAP_HEIGHT * this.cellSize;
-    this.ballCanvas.width = MAP_WIDTH * this.cellSize;
-    this.ballCanvas.height = MAP_HEIGHT * this.cellSize;
+    this.mapCanvas.width = this.ballCanvas.width = MAP_WIDTH * this.cellSize;
+    this.mapCanvas.height = this.ballCanvas.height = MAP_HEIGHT * this.cellSize;
 
     gameBoard.appendChild(this.panel);
     gameBoard.appendChild(canvasContainer);
@@ -53,6 +61,7 @@ class Game extends PageComponent {
 
   public afterMount(): void {
     renderPanel.call(this);
+    renderMap.call(this);
   }
 }
 
