@@ -1,0 +1,39 @@
+@import '../../assets/styles/variables';
+
+.gameBoard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: calc(#{$mapWidth * $gameCellSize});
+  height: calc(#{$mapHeight * $gameCellSize + 1.5 * $gameCellSize});
+  padding: 1vmin;
+  background-color: $white;
+  user-select: none;
+
+  .-energy-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(#{1.5 * $gameCellSize});
+    box-sizing: border-box;
+    border-bottom: 1vmin dashed $black;
+    color: $black;
+    font-weight: 600;
+    font-size: calc(#{$gameCellSize * 0.8});
+    letter-spacing: 0.7vmin;
+  }
+
+  .-canvas-container {
+    position: relative;
+
+    .-map-canvas,
+    .-ball-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(#{$mapWidth * $gameCellSize});
+      height: calc(#{$mapHeight * $gameCellSize});
+    }
+  }
+}

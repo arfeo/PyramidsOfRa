@@ -1,0 +1,1 @@
+export { renderGameBoard } from './gameBoard';
