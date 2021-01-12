@@ -64,8 +64,6 @@ export abstract class PageComponent<TState = {}> extends BaseComponent {
     }
 
     this.appRoot.appendChild(this.render());
-
-    typeof this.afterUpdate === 'function' && this.afterUpdate();
   }
 
   public setState<K extends keyof TState>(state: (Pick<TState, K> | TState | null)): void {
@@ -76,6 +74,8 @@ export abstract class PageComponent<TState = {}> extends BaseComponent {
 
     if (typeof this.render === 'function' && this.shouldUpdate(this.state)) {
       this.renderComponent();
+
+      typeof this.afterUpdate === 'function' && this.afterUpdate();
     }
   }
 
